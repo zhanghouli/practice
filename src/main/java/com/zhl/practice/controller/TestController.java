@@ -1,5 +1,9 @@
 package com.zhl.practice.controller;
 
+import com.zhl.practice.util.PropertiesUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +18,13 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/test")
 public class TestController {
 
+    @Autowired
+    private PropertiesUtil propertiesUtil;
+    /**
+     * 可以加载
+     */
+    @Value("${server.port}")
+    private String port;
     /**
       * @Author holley
       * @Description 映射不同路径到相同方法，produces用来设置当回内容的类型
@@ -27,4 +38,24 @@ public class TestController {
         return "url:" + request.getRequestURL().toString();
     }
 
+    /**
+     * @author holley
+     * @description 测试加载配置文件内容
+     */
+    @GetMapping("/active")
+    public String exporteByTaskIdNew() {
+        /**
+         * 在类中直接使用Properties.load读取配置文件的参数
+         */
+        return PropertiesUtil.getUriForOrderExport();
+        /**
+         * 创建实例来调用时，无法加载配置文件
+         */
+//        return new PropertiesUtil().getActive2();
+        /**
+         * 注入propertiesUtil的bean时可以加载
+         */
+//        return propertiesUtil.getActive2();
+//        return port;
+    }
 }

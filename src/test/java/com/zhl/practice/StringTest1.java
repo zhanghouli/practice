@@ -5,7 +5,7 @@ package com.zhl.practice;
  * @description 请输入一句话进行描述
  * @create 2020-01-07 16:56
  **/
-public class StringTest {
+public class StringTest1 {
         public static void main(String[] args){
 //            String str1 = "和谐";
 //            String str2 = "社会";
